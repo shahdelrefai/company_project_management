@@ -1,0 +1,85 @@
+﻿@model User
+
+@{
+    var thisUser = Model;
+    Layout = "~/Views/Shared/MNGERO.cshtml";
+    ViewData["Title"] = "Sign Up";
+}
+
+
+<link rel="stylesheet" href="~/css/signup.css" />
+
+
+<div class="signup-container">
+    <h2 class="mngero-font">Sign Up</h2>
+    <form asp-controller="Home" asp-action="SignUpUser" method="post" onsubmit="return validateForm()">
+        <div>
+            <input type="text" name="Name" id="fullname" placeholder="Full name" value="@thisUser.Name">
+        </div>
+        @if(thisUser.Username == "unavailable")
+        {
+            <span class="mngero-font" style="font-size:11px; color:red;">Username unavailable</span>
+            <input type="text" name="Username" id="username" placeholder="@@username">
+        }
+        else
+        {
+            <span class="mngero-font" style="font-size:11px; color:green;">Username available</span>
+            <input  type="text" name="Username" id="username" placeholder="@@username" value="@thisUser.Username">
+        }
+        @if(thisUser.Email == "unavailable")
+        {
+            <span class="mngero-font" style="font-size:11px; color:red;">Email already registered</span>
+            <input type="email" name="Email" id="email" placeholder="Email">
+        }
+        else
+        {
+            <span class="mngero-font" style="font-size:11px; color:green;">Email available</span>
+            <input type="email" name="Email" id="email" placeholder="Email" value="@thisUser.Email">
+        }
+        <input type="password" name="Password" id="password" placeholder="Password">
+        <button type="submit" id="login-button">Sign Up</button>
+    </form>
+</div>
+
+<script>
+
+    function validateForm() {
+        const fullnameInput = document.getElementById("fullname");
+        const usernameInput = document.getElementById("username");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        var validated = false;
+
+        if (fullnameInput.value.trim() === "") {
+            fullnameInput.classList.add("input-error");
+            validated = false;
+        } else {
+            fullnameInput.classList.remove("input-error");
+        }
+
+        if (usernameInput.value.trim() === "") {
+            usernameInput.classList.add("input-error");
+            validated = false;
+        } else {
+            usernameInput.classList.remove("input-error");
+        }
+
+        if (emailInput.value.trim() === "") {
+            emailInput.classList.add("input-error");
+            validated = false;
+        } else {
+            emailInput.classList.remove("input-error");
+        }
+
+        if (passwordInput.value.trim() === "") {
+            passwordInput.classList.add("input-error");
+            validated = false;
+        } else {
+            passwordInput.classList.remove("input-error");
+            validated = true;
+        }
+
+        return validated;
+    }
+
+</script>

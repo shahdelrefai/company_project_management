@@ -1,0 +1,9 @@
+﻿@model User
+
+@{
+    var thisUser = Model;
+    Layout = "~/Views/Shared/MNGERO.cshtml";
+    ViewData["Title"] = "Sign Up Completed";
+}
+
+<h1>username : @thisUser.Username <br /> password : @thisUser.Password  <br /> email : @thisUser.Email <br /> Name : @thisUser.Name</h1>
