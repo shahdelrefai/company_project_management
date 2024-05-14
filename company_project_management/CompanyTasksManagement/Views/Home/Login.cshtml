@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "~/Views/Shared/MNGERO.cshtml";
+    ViewData["Title"] = "Login";
+    var user = Model;
+}
+
+<link rel="stylesheet" href="~/css/login.css" />
+
+
+<div class="login-container">
+    <div class="login-box">
+        <h2 class="mngero-font">Login</h2>
+        <form asp-controller="Home" asp-action="AuthenticateLogin" method="post" onsubmit="return validateForm()">
+            <input type="text" name="Username" id="username" placeholder="Username">
+            <input type="password" name="Password" id="password" placeholder="Password">
+            <button type="submit" id="login-button">Login</button>
+            <div class="separator mngero-font">or</div>
+        </form>
+        <form asp-controller ="Home" asp-action="SignUp">
+            <button type="submit" id="signup-button">Sign Up</button>
+        </form>
+       
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        var validated = true;
+
+        if (usernameInput.value.trim() === "") {
+            usernameInput.classList.add("input-error");
+            validated = false;
+        } else {
+            usernameInput.classList.remove("input-error");
+        }
+
+        if (passwordInput.value.trim() === "") {
+            passwordInput.classList.add("input-error");
+            validated = false;
+        } else {
+            passwordInput.classList.remove("input-error");
+        }
+
+        return validated;
+    }
+</script>

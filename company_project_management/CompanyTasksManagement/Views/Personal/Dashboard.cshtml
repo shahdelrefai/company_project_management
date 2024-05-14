@@ -1,0 +1,79 @@
+﻿@model User
+
+@{
+    Layout = "~/Views/Shared/PersonalLayout.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<div class="tab-name" style="font-size:40px;">Dashboard</div>
+
+<div class="row first-row">
+    <div class="col-4 box-cont">
+        <span class="greeting">
+            Good Morning, @Model.Name.
+        </span>
+        <div class="clock">
+            <span id="time"></span>
+            <br />
+            <span id="date"></span>
+        </div>
+    </div>
+    <div class="col-8 box-cont">2 of 2</div>
+</div>
+
+<script>
+    window.addEventListener("load", () => {
+        clock();
+        function clock() {
+            const today = new Date();
+
+            const hours = today.getHours();
+            const minutes = today.getMinutes();
+
+            const hour = hours < 10 ? "0" + hours : hours;
+            const minute = minutes < 10 ? "0" + minutes : minutes;
+
+            const hourTime = hour > 12 ? hour - 12 : hour;
+
+            const ampm = hour < 12 ? "am" : "pm";
+
+            const month = today.getMonth();
+            const day = today.getDate();
+            const dayName = today.getDay();
+
+            const monthList = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+            const daysList = [
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat"
+            ];
+
+            const date = daysList[dayName] + "," + " " + monthList[month] + " " + day;
+            const time = hourTime + ":" + minute + " " + ampm;
+
+            document.getElementById("time").innerHTML = time;
+            document.getElementById("date").innerHTML = date;
+            setTimeout(clock, 1000);
+        }
+    });
+</script>
